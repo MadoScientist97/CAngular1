@@ -7,7 +7,8 @@
     $scope.lunchList = ''
     $scope.TestCount = function (){
         var stList = []
-        stList = $scope.lunchList.split(',')
+        var foodnospace = $scope.lunchList.replace(/ /g,'')
+        stList = foodnospace.split(',')
         var count = stList.length
         for (var i = 0;i<stList.length;i++){
             if (stList[i]==='')
