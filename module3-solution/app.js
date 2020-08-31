@@ -26,10 +26,10 @@
                 promise.then(function(response){
                 menu.fooditems = response.data.menu_items
                 menu.narrow = []
-                console.log("checking")
                 for (let i=0;i<menu.fooditems.length;i++){
                     //code for getting the matching items
-                    if (menu.fooditems[i].name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)  
+                    var patt = new RegExp("(^"+searchTerm.toLowerCase()+"|\\s"+searchTerm.toLowerCase()+")")
+                    if (patt.test(menu.fooditems[i].name.toLowerCase()) === true || patt.test(menu.fooditems[i].description.toLowerCase()) === true)  
                     menu.narrow.push(menu.fooditems[i])
                 }
                 if  (menu.narrow.length===0)
@@ -38,7 +38,6 @@
                     menu.errorMessage=""
                 })
                 .catch(function (error){
-                    console.log(error)
                     console.log("Data Could Not Be Recieved!!")
                 });
 
@@ -51,7 +50,8 @@
             }
             for (let i=0;i<menu.fooditems.length;i++){
                 //code for getting the matching items
-                if (menu.fooditems[i].name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)  
+                var patt = new RegExp("(^"+searchTerm.toLowerCase()+"|\\s"+searchTerm.toLowerCase()+")")
+                if (patt.test(menu.fooditems[i].name.toLowerCase()) === true || patt.test(menu.fooditems[i].description.toLowerCase()) === true)   
                 menu.narrow.push(menu.fooditems[i])
                 }
                 if  (menu.narrow.length===0)
