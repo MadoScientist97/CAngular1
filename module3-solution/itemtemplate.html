@@ -1,5 +1,5 @@
 <ul>
-    <li ng-repeat="item in list">
-        {{item.name}},{{item.sname}},{{item.desc}} <button class="btn btn-default" ng-click="narrow.deleteItem($index)">Don't Want This One</button>
+    <li ng-repeat="item in list.narrow">
+        Short Name: {{item.short_name}}<br>Name: {{item.name}}<br>Description: {{item.description}} <br><button class="btn btn-default" ng-click="list.deleteItem($index)">Don't Want This One</button>
     </li>
 </ul>

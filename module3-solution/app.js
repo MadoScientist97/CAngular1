@@ -15,29 +15,58 @@
         menu.narrow = []
         menu.errorMessage = ''
         menu.narrowDown = function(){
-            // if (menu.fooditems.length!==0){
-                searchTerm = menu.sTerm
-                if (!searchTerm){
+            menu.narrow = []
+            searchTerm = menu.sTerm
+            if (menu.fooditems.length===0){
+                if (!searchTerm || searchTerm === ''){
                     menu.errorMessage = "Nothing Found!!"
                     return
                 }
-                console.log(searchTerm)
                 var promise = MenuSearchService.retriveMenu()
                 promise.then(function(response){
-                menu.fooditems = response.data
-                console.log(response.data)
+                menu.fooditems = response.data.menu_items
+                menu.narrow = []
+                console.log("checking")
+                for (let i=0;i<menu.fooditems.length;i++){
+                    //code for getting the matching items
+                    if (menu.fooditems[i].name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)  
+                    menu.narrow.push(menu.fooditems[i])
+                }
+                if  (menu.narrow.length===0)
+                    menu.errorMessage="Nothing Found!!"
+                else
+                    menu.errorMessage=""
                 })
                 .catch(function (error){
-                    console.log("Could Not recieve Data!!")
+                    console.log(error)
+                    console.log("Data Could Not Be Recieved!!")
                 });
-            // }
 
-            // menu.fooditems.foreach(function(elem){
-            //     //code for getting the matching items
-            // })
+            }
+            else{
+            menu.narrow = []
+            if (searchTerm === ''){
+                menu.errorMessage = "Nothing Found!!"
+                return
+            }
+            for (let i=0;i<menu.fooditems.length;i++){
+                //code for getting the matching items
+                if (menu.fooditems[i].name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)  
+                menu.narrow.push(menu.fooditems[i])
+                }
+                if  (menu.narrow.length===0)
+                menu.errorMessage="Nothing Found!!"
+                else
+                menu.errorMessage=""
+
+            }
         };
         menu.deleteItem = function(index){
             menu.narrow.splice(index,1)
+            if (menu.narrow.length!==0)
+            menu.errorMessage=''
+            else
+            menu.errorMessage="No more Items!!"
         }
     };
 
