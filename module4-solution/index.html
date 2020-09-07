@@ -1,50 +1,46 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Narrow Down Your Menu Choice</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="angular.min.js"></script>
-    <script src="app.js"></script>
-    <style>
-        .error {
-          font-weight: bold;
-          color: red;
-          font-size: 1.2em;
-        }
-        li {
-          margin-bottom: 7px;
-          font-size: 1.2em;
-        }
-        li > button {
-          margin-left: 6px;
-        }
-        button > span {
-          color: green;
-        }
-      </style>  
-</head>
-<body ng-app="restfulAngular">
-   <div class="container" ng-controller="narrowDownController as narrowC">
-    <div>
-        <h1>Narrow Down Your Chinese Menu Choice</h1>
-        <div class="form-group">
-            <input ng-model="narrowC.sTerm" type="text" placeholder="search term" class="form-control">
-        </div>
-        <div class="form-group narrow-button">
-            <button class="btn btn-primary" ng-click="narrowC.narrowDown()">Narrow It Down For Me!</button>
-        </div>
-    </div>
-    <!-- found-items should be implemented as a component -->
-    <div>
-        <br><br><br>
-    <found-items my-list="narrowC"></found-items>
-    </div>
-    <div class="error" ng-if="narrowC.errorMessage.length">
-        {{narrowC.errorMessage}}
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en" ng-app="MenuApp">
 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restaurant Menu App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+    .btn { margin: 5px; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li ui-sref-active="active" ui-sref="home" role="presentation"><a href="#">Home</a></li>
+                    <li ui-sref-active="active" ui-sref="categories" role="presentation"><a href="#">Categories</a></li>
+                </ul>
+            </nav>
+            <h3>RESTaurant</h3>
+        </div>
+        <ui-view></ui-view>
+    </div>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+    <script src="modules/menuapp.module.js"></script>
+    <script src="modules/data.module.js"></script>
+    <script src="controllers/categories.controller.js"></script>
+    <script src="controllers/items.controller.js"></script>
+    <script src="services/menudata.service.js"></script>
+    <script src="components/categories.component.js"></script>
+    <script src="components/items.component.js"></script>
+    <script src="routes/routes.js"></script>
+    <script src="templates/home.template.html"></script>
+    <script src="templates/categories.component.html"></script>
+    <script src="templates/categories.template.html"></script>
+    <script src="templates/items.component.html"></script>
+    <script src="templates/items.template.html"></script>
 </body>
+
 </html>
